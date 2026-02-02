@@ -20,7 +20,9 @@ app.use(cookieParser());
 
 app.use(express.json());
 app.use(express.urlencoded({extended:true}))  
-
+app.get("/", (req, res) => {
+  res.send("Backend running on Vercel 🚀");
+});
 app.use("/auth", authRoutes);
 app.use("/posts", postRoutes);
 app.use("/comments", commentRoutes);
