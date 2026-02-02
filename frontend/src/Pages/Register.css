@@ -1,0 +1,138 @@
+/* Register.css - Premium Dark Theme */
+
+.register-wrapper {
+    min-height: 100vh;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #0f172a;
+    background-image: 
+        radial-gradient(at 100% 0%, rgba(59, 130, 246, 0.15) 0, transparent 50%), 
+        radial-gradient(at 0% 100%, rgba(147, 51, 234, 0.15) 0, transparent 50%);
+    padding: 20px;
+    font-family: 'Inter', sans-serif;
+}
+
+.register-card {
+    background: rgba(30, 41, 59, 0.7);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    padding: 40px;
+    border-radius: 24px;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+    width: 100%;
+    max-width: 450px;
+}
+
+.register-card h2 {
+    font-size: 32px;
+    font-weight: 800;
+    background: linear-gradient(to right, #fff, #94a3b8);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    margin-bottom: 8px;
+    text-align: center;
+}
+
+.register-subtitle {
+    color: #94a3b8;
+    text-align: center;
+    margin-bottom: 30px;
+    font-size: 15px;
+}
+
+.form-grid {
+    display: grid;
+    gap: 20px;
+}
+
+.input-group {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.input-group label {
+    font-size: 13px;
+    font-weight: 600;
+    color: #94a3b8;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+.register-card input, 
+.register-card select {
+    width: 100%;
+    padding: 12px 16px;
+    background-color: rgba(15, 23, 42, 0.6);
+    border: 1.5px solid #334155;
+    border-radius: 12px;
+    font-size: 15px;
+    color: #f8fafc;
+    transition: all 0.25s ease;
+    box-sizing: border-box;
+}
+
+/* Custom styling for the dropdown arrow */
+.register-card select {
+    appearance: none;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='%2394a3b8'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M19 9l-7 7-7-7'%3E%3C/path%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 16px center;
+    background-size: 18px;
+    cursor: pointer;
+}
+
+.register-card input:focus, 
+.register-card select:focus {
+    outline: none;
+    border-color: #3b82f6;
+    background-color: #0f172a;
+    box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.1);
+}
+
+.register-button {
+    width: 100%;
+    background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%);
+    color: white;
+    padding: 14px;
+    border: none;
+    border-radius: 12px;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    margin-top: 10px;
+}
+
+.register-button:hover:not(:disabled) {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 20px -5px rgba(59, 130, 246, 0.4);
+}
+
+.register-button:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+}
+
+.register-footer {
+    margin-top: 25px;
+    text-align: center;
+    font-size: 14px;
+    color: #64748b;
+}
+
+.register-footer a {
+    color: #3b82f6;
+    text-decoration: none;
+    font-weight: 600;
+}
+
+.register-footer a:hover {
+    color: #60a5fa;
+    text-decoration: underline;
+}
+
