@@ -46,7 +46,7 @@ export const getCommentsByPost = async (req, res) => {
       order: [['createdAt', 'DESC']]
     });
 
-    res.json(comments);
+    res.status(201).json(comments);
   } catch (err) {
     console.error(err);
     res.status(500).json({ msg: "Failed to fetch comments" });
@@ -62,11 +62,12 @@ export const deleteComment = async (req, res) => {
     const { commentId } = req.params;
 
     const comment = await Comment.findByPk(commentId);
-
+    console.log('cc',comment,req.user.id);
+    
     if (!comment) {
       return res.status(404).json({ msg: "Comment not found" });
     }
-      if (req.user.role === 'USER' && post.authorId !== req.user.id) {
+      if (req.user.role === 'USER' && comment.userId !== req.user.id) {
       return res.status(403).json({ msg: "Not authorized to delete this post" });
     }
 
@@ -74,9 +75,9 @@ export const deleteComment = async (req, res) => {
 
     await comment.destroy();
 
-    res.json({ msg: "Comment deleted successfully", commentId });
+    res.status(201).json({ msg: "Comment deleted successfully", commentId });
   } catch (err) {
-    console.error(err);
+    console.error('dddsdd',err);
     res.status(500).json({ msg: "Server error" });
   }
 };

@@ -21,30 +21,85 @@ function CreatePost() {
     setForm({ ...form, [e.target.name]: e.target.value });
   };
 
-  const handleSubmit = async (e) => {
-    if (e) e.preventDefault();
-    if (!form.title || !form.content) {
-      setNotification({ type: 'error', msg: 'Headline and story are required!' });
-      return;
+ const handleSubmit = async (e) => {
+  if (e) e.preventDefault();
+ 
+  
+  if (!form.title || !form.content) {
+    setNotification({ type: "error", msg: "Headline and story are required!" });
+    return;
+  }
+
+  
+  try {
+    setLoading(true);
+
+    const payload = {
+      ...form,
+      tags: form.tags
+        ? form.tags.split(",").map(t => t.trim()).filter(Boolean)
+        : []
+
+    };
+
+  
+    
+
+    const res = await axiosInstance.post(
+      "/posts/create",
+      payload,
+      { withCredentials: true }
+    );
+    
+    setNotification({ type: "success", msg: "Post Published Successfully! ✅" });
+
+    setTimeout(() => navigate("/"), 1500);
+
+  } catch (err) {
+    console.error("Create post error:", err);
+
+    let message = "Something went wrong";
+
+    if (err.response) {
+      // Server responded with status
+      const status = err.response.status;
+
+      if (status === 400) {
+        message = err.response.data?.msg || "Invalid input data";
+      } 
+      else if (status === 401) {
+        message = "Please login again";
+      } 
+      else if (status === 403) {
+        message = "You are not allowed to do this";
+      } 
+      else if (status === 404) {
+        message = "API endpoint not found";
+      } 
+      else if (status >= 500) {
+        message = "Server error. Try again later";
+      }
+
+      // express-validator errors
+      if (err.response.data?.errors?.length) {
+        message = err.response.data.errors[0].msg;
+      }
+
+    } else if (err.request) {
+      // No response from server
+      message = "Network error. Check your connection";
+    } else {
+      // Something else happened
+      message = err.message;
     }
 
-    try {
-      setLoading(true);
-      await axiosInstance.post("/posts/create", {
-        ...form,
-        tags: form.tags.split(",").map(t => t.trim()).filter(Boolean),
-      }, { withCredentials: true });
+    setNotification({ type: "error", msg: message });
 
-      setNotification({ type: 'success', msg: 'Post Published Successfully! ✅' });
-      
-      // Delay navigation slightly so they can see the success toast
-      setTimeout(() => navigate("/"), 1500); 
-    } catch (err) {
-      setNotification({ type: 'error', msg: err.response?.data?.msg || "Post failed" });
-    } finally {
-      setLoading(false);
-    }
-  };
+  } finally {
+    setLoading(false);
+  }
+};
+
 
   return (
     <div className="editor-wrapper">
@@ -67,7 +122,7 @@ function CreatePost() {
 
         <h2>New Story</h2>
 
-        <form onSubmit={handleSubmit} style={{marginTop: '40px'}}>
+        <form onSubmit={handleSubmit} style={{marginTop: '40px'}} noValidate>
           {/* ... Title Input ... */}
           <div className="form-group">
             <input

@@ -106,7 +106,7 @@ try {
 }
 
 
-    res.json({ msg: "Post deleted successfully", postId: id });
+    res.status(200).json({ msg: "Post deleted successfully", postId: id });
   } catch (err) {
     console.error(err);
     res.status(500).json({ msg: "Server error" });

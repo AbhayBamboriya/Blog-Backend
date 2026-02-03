@@ -14,18 +14,14 @@ const cookieOptions={
 export const register = async (req, res) => {
   try {
     const { name, email, password, role } = req.body;
-    console.log('dfd',name);
-    
-    // check if user exists
+
     const existingUser = await User.findOne({ where: { email } });
     if (existingUser) {
       return res.status(400).json({ msg: "User already exists" });
     }
 
-    // hash password
     const hash = await bcrypt.hash(password, 10);
 
-    // create user
     const user = await User.create({
       name,
       email,
@@ -44,6 +40,7 @@ export const register = async (req, res) => {
     res.status(500).json({ msg: "Server error" });
   }
 };
+
 
 export const login = async (req, res) => {
   try {

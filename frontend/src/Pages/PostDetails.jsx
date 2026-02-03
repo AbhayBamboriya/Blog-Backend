@@ -58,15 +58,10 @@ const PostDetail = () => {
       setCommentText("");
       triggerNotify("Comment shared! 🚀", "success");
     } catch (err) {
-        console.log("Backend error:", err.response?.data || err.message);
+        console.log("Backend error:", err.response?.data );
 
-  const msg =
-    err.response?.data
-  
-
-//   triggerNotify(msg, "delete");
-    // triggerNotify(err?.response?.message,"error");
-       triggerNotify("Error posting comment", "delete");
+      const msg =err.response?.data
+       triggerNotify(err?.response?.data?.msg , "error");
     } finally {
       setPosting(false);
     }

@@ -8,7 +8,7 @@ function Register() {
     name: "",
     email: "",
     password: "",
-    role: "",
+    role: "USER",
   });
 
   const [loading, setLoading] = useState(false);
@@ -40,7 +40,7 @@ function Register() {
         <h2>Create Account</h2>
         <p className="register-subtitle">Join the DevBlog community today</p>
         
-        <form onSubmit={handleRegister} className="form-grid">
+        <form onSubmit={handleRegister} className="form-grid" noValidate>
   <div className="input-group">
     <label>Full Name</label>
     <input

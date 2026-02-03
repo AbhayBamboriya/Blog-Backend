@@ -31,13 +31,19 @@
 }
 
 /* --- Fixed Notification (Small Toast) --- */
+/* ERROR */
+.toast-notification.error {
+  background: #ff0000;
+  height: 5%;
+}
 .toast-notification {
     position: fixed;
     bottom: 30px;
     height: 30%;
     right: 30px;
     width: auto;
-    height: auto; /* Fixed: prevents full height bar */
+    /* height: 10%; */
+    /* height: auto; Fixed: prevents full height bar */
     padding: 12px 20px; /* Slimmer height */
     border-radius: 10px;
     display: flex;
@@ -51,8 +57,8 @@
     animation: slideUp 0.4s cubic-bezier(0.18, 0.89, 0.32, 1.28);
 }
 
-.toast-notification.success { background: #10b981; }
-.toast-notification.delete { background: #ef4444; }
+.toast-notification.success { background: #10b981;   height: 5%}
+.toast-notification.delete { background: #ef4444;   height: 5%}
 
 /* --- Centered Comment Input --- */
 .comment-input-card {
